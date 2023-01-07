@@ -1,12 +1,14 @@
 # sql-to-csv-converter
 ## Purpose
-The tool serves to convert a SQL dump created by [HeidiSQL](https://www.heidisql.com/) into CSV to allow for easier import in other tools. I had a very large dataset (~10 GB, >100 million lines) to export and convert hence for performance reasons neither a direct CSV export from a regular HeidiSQL query nor a table export from PhpMyAdmin was an option.
+This script serves to convert a SQL dump created by [HeidiSQL](https://www.heidisql.com/) and consisting of (many) `INSERT` statements into CSV to allow for easier import in other tools. I had a very large dataset (~10 GB, >100 million lines) to export and convert so for performance reasons neither a direct CSV export from a regular HeidiSQL query nor a table export from PhpMyAdmin was an option.
 
 ## Usage
 
 ````
 python sql_to_csv.py -s source.sql -t output.csv
 ````
+
+The script will find the first `INSERT` statement in `source.sql` and derive the column names from it. All subsequent `...VALUES...` statements are converted into comma-separated lines which are stripped off remaining SQL syntax such as brackets. HeidiSQL portions the `INSERT`s in batches of 10,000 lines. Column names mentioned in any `INSERT` after the first are ignored to keep the CSV clean.
 
 ## Example
 Sample input (from HeidiSQL > Tools > [Export Database as SQL](https://www.heidisql.com/screenshots.php?which=export_sql), see `sample.sql` for full example):
