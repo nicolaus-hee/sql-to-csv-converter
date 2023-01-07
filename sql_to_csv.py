@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from datetime import datetime
+import argparse
 
 def is_insert_line(line: str) -> bool:
     if("INSERT INTO" in line):
@@ -82,8 +83,13 @@ def append_line(target_file: str, line: str) -> bool:
     return True
 
 def main():   
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-s','--source_file', type=str, help='name of input file', required=True)
+    parser.add_argument('-t','--target_file', type=str, help='name of output file', required=True)
+    args = parser.parse_args()
+
     print(str(datetime.now()) + " --> start")
-    convert_file("sample.sql", "sample.csv")
+    convert_file(args.source_file, args.target_file)
     print(str(datetime.now()) + " --> end")
 
 if __name__ == "__main__":
