@@ -9,7 +9,7 @@ python sql_to_csv.py -s source.sql -t output.csv
 ````
 
 ## Example
-Sample input (from HeidiSQL > Tools > Export Database as SQL, see `sample.sql` for full example):
+Sample input (from HeidiSQL > Tools > [Export Database as SQL](https://www.heidisql.com/screenshots.php?which=export_sql), see `sample.sql` for full example):
 ```
 INSERT INTO `table_name` (`statusID`, `status`, `equipment`, `timestamp`, `user`, `seconds_since_last`) VALUES
         (769506, 'ACTIVE', 10457770, '2018-01-02 16:50:42', '', 720706),
@@ -30,4 +30,4 @@ statusID,status,equipment,timestamp,user,seconds_since_last
 ```
 
 ## Performance
-The tool processes roughly 60,000 lines from the target per second. The output file is only touched every 10,000 lines yielding a significant performance increase versus saving every line individually.
+The output file is only touched every 10,000 lines yielding a significant performance increase versus saving every line individually. Converting 110,000,000 lines took 12 minutes, i.e. approx. 150,000 items per second.
